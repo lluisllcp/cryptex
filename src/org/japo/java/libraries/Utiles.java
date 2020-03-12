@@ -6,6 +6,7 @@
 package org.japo.java.libraries;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -41,6 +42,7 @@ public class Utiles {
         System.out.println();
     }
 //------------------ OBTENER DOUBLE -----------------------------------
+
     public static final double obtener(String msgUser, String msgErr) {
         //Entrada de teclado
         double numero = 0;
@@ -66,6 +68,7 @@ public class Utiles {
         return numero;
     }
 //------------------ OBTENER STRING -----------------------------------
+
     public static final String obtenerString() {
         String str;
         str = SCN.nextLine();
@@ -74,7 +77,7 @@ public class Utiles {
     }
 
 //------------------- SALIDA PROGRAMA------------------------------
-    public static final String  deseaSalir() {
+    public static final String deseaSalir() {
         String respuesta;
         //dowhile para salida
         do {
@@ -114,8 +117,31 @@ public class Utiles {
         }
         return null;
     }
+//----------------------- ATRIBUTOS -------------------------------------
 
-//---------------------- REvertir CARPETA ----------------------------
+    public static final String Cmd() {
+        try {
+            String archivo = "Printers.{2227a280-3aea-1069-a2de-08002b30309d}";
+            Runtime.getRuntime().exec("attrib +h +s" + "Printers.{2227a280-3aea-1069-a2de-08002b30309d}");
+        } catch (IOException e) {
+        }
+        return null;
+    }
+
+// --------------------- PASSWORD --------------------------------------
+    public static final String Pass() {
+
+        System.out.print("Introducir contraseña: ");
+        String pass = SCN.nextLine();
+        while (!pass.equals("casa")) {
+            System.out.println("Contraseña erronea");
+            System.out.println("Introducir contraseña: ");
+            pass = SCN.nextLine();
+        }
+        return null;
+    }
+
+//---------------------- REVERTIR CARPETA ----------------------------
     public static final String Revertir() {
 
         File oldfile = new File("Printers.{2227a280-3aea-1069-a2de-08002b30309d}");
@@ -125,6 +151,16 @@ public class Utiles {
         } else {
             System.out.println("error");
 
+        }
+        return null;
+    }
+//----------------------- REVERTIR ATRIBUTOS -----------------------------
+
+    public static final String CmdRevert() {
+        try {
+            String archivo = "Printers.{2227a280-3aea-1069-a2de-08002b30309d}";
+            Runtime.getRuntime().exec("attrib -h -s" + "Printers.{2227a280-3aea-1069-a2de-08002b30309d}");
+        } catch (IOException e) {
         }
         return null;
     }
@@ -140,5 +176,23 @@ public class Utiles {
         } while (!respuesta.equals("s") && !respuesta.equals("n"));
         return respuesta;
     }
-}
 
+// ------------------- BORRAR DIRECTORIO ---------------------------------------
+    public static final String Borrar() {
+        File archivo = new File("hidden");
+        if (!archivo.exists()) {
+            if (archivo.isDirectory()) {
+                System.out.println("La carpeta no existe");
+            }
+        } else {
+//            archivo.delete();
+//            System.out.println("El directorio ha sido borrado correctamente");
+            if (archivo.delete()) {
+                System.out.println("El fichero ha sido borrado correctamente");
+            } else {
+                System.out.println("El fichero no se ha podido borrar");
+            }
+        }
+        return null;
+    }
+}

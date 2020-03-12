@@ -15,6 +15,7 @@
  */
 package org.japo.java.main;
 
+import java.io.IOException;
 import org.japo.java.app.App;
 
 /**
@@ -27,7 +28,7 @@ public final class Main {
     private static final String ACCESS_UID = "JAPO-Omicron-0";
 //punt de entrada al programa
 
-    public static final void main(String[] args) {
+    public static final void main(String[] args) throws IOException {
 //si
         if (args.length == 1 && args[0].equals(ACCESS_UID)) {
            final App APP = new App();

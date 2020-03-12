@@ -5,7 +5,7 @@
  */
 package org.japo.java.app;
 
-import java.util.Date;
+import java.io.IOException;
 import java.util.Scanner;
 import org.japo.java.libraries.Utiles;
 
@@ -15,9 +15,9 @@ import org.japo.java.libraries.Utiles;
  */
 public final class App {
 
-    public final void launchApp() {
+    public final void launchApp() throws IOException {
 
-        Utiles.muestraBanner();
+//        Utiles.muestraBanner();
 
         int opcion;
         String respuesta;
@@ -25,11 +25,15 @@ public final class App {
         Scanner SCN = new Scanner(System.in);
 
         do {
+            Utiles.muestraBanner();
             System.out.println("1. Crear Carpeta");
             System.out.println("2. Ocultar");
             System.out.println("3. Revertir");
-            System.out.println("4. Salir");
+            System.out.println("4. Borrar directorio hidden");
+            System.out.println("5. Salir");
+            System.out.println(" --- ");
             System.out.print("Introduzca la opción deseada: ");
+
             opcion = SCN.nextInt();
 
             switch (opcion) {
@@ -39,27 +43,32 @@ public final class App {
                     break;
                 //ocultar = renombrar
                 case 2:
-//                    do {
-//                        Utiles.Renombre();
-//                        respuesta = Utiles.deseaCont();
-//                    } while (respuesta.equalsIgnoreCase("s"));
-
                     Utiles.Renombre();
+                    Utiles.Cmd();
                     break;
                 //restaurar
                 case 3:
+                    Utiles.Pass();
                     Utiles.Revertir();
+                    Utiles.CmdRevert();
+                    break;
+                //Borrar directorio
+                case 4:
+                    Utiles.Borrar();
                     break;
                 //salida
-                    case 4:
+                case 5:
                     //salir
+                    respuesta = Utiles.deseaSalir();
+                    respuesta.equalsIgnoreCase("n");
                     break;
+                //Default
                 default:
                     System.out.println("Solo acepto numeros del 1 al 4");
             }
             //salida
-            respuesta = Utiles.deseaSalir();
-        } while (respuesta.equalsIgnoreCase("n"));
-    }
 
+        } while(true);
+        
+    }
 }
